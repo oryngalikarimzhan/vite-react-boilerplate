@@ -1,0 +1,37 @@
+@mixin laptop {
+  @media (max-width: $laptop-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}
+
+@mixin touch-screen {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+@mixin adaptive-font($minSize, $maxSize) {
+  $increment: $maxSize - $minSize;
+  $mobIncrement: $increment + $increment * 0.7;
+  @media (max-width: calc($mobile-width - 1px)) {
+    font-size: calc(#{$minSize + px} + #{$mobIncrement} * ((100vw - 320px) / #{1280}));
+  }
+  @media (min-width: $mobile-width) {
+    font-size: calc(#{$minSize + px} + #{$increment} * (100vw / #{1280}));
+  }
+  @media (min-width: $desktop-width) {
+    font-size: calc(#{$minSize + px} + #{$increment} * (1920px / #{1280}));
+  }
+}
